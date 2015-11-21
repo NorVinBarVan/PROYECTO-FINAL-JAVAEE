@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./PaginaMaestra.xhtml">
+
+            <ui:define name="content">
+                <h2>MODIFICACION DE EMPLEADO</h2>
+                 <table>
+                <form action="serEditarEmpleado" method ="post">
+                         <tr>
+                            <td><label>CODIGO A MODIFICAR: </label></td>
+                            <td><p:inputText id ="codigoM"/></td>
+                        </tr>
+                         <tr>
+                            <td><label>NUEVO CODIGO: </label></td>
+                            <td><p:inputText id ="codigo"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>NOMBRE: </label></td>
+                            <td><p:inputText id ="nombre"/></td>
+                        </tr>
+                        <tr>
+                            <td> <label>NIT: </label></td>
+                            <td> <p:inputText id ="nit"/> </td>
+                        </tr>
+                        <tr>
+                             <td> <label>EDAD:  </label></td>
+                               <td>
+                                <input type ="number" name ="edad"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>SALARIO: </label></td>
+                            <td><input type="number"  name="salario"  id="salario" min="0" max="100000" step="0.01"  title="Digite Salario. Ejemplo: 99.99"/></td>
+                        </tr>
+                         <tr>
+                            <td><label>CARGO: </label> </td>
+                                    <td><p:selectOneRadio id="cargo">
+                                            <f:selectItem itemLabel="Vendedor" itemValue="Vendedor" />
+                                            <f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+                                    </p:selectOneRadio></td>
+                        </tr>
+                        <tr>
+                            <td><h:commandButton value="ACTUALIZAR"/></td>
+                        </tr>
+                </form>
+                 </table>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./PaginaMaestra.xhtml">
+            <ui:define name="content">
+                 <h2>REGISTRO DE PAQUETES</h2>
+                    <table>
+                    <form method="post" action ="serIngresoPaquete">
+                         <tr>
+                            <td><label>CODIGO: </label></td>
+                            <td><p:inputText id ="codigo"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>NOMBRE: </label></td>
+                            <td><p:inputText id ="nombre"/></td>
+                        </tr>
+                        <tr>
+                            <td> <label>DESCRIPCION: </label></td>
+                            <td> <p:inputText id ="descripcion"/> </td>
+                        </tr>
+                        <tr>
+                            <td><label>DESTINO: </label> </td>
+                            <td><p:inputText id ="destino"/></td>
+                        </tr>
+                        <tr>
+                           <td><label>PRECIO: </label></td>
+                            <td><input type="number"  name="precio"  id="precio" min="0" max="100000" step="0.01"  title="Digite Precio. Ejemplo: 99.99"/></td>
+                        </tr>
+                         <tr>
+                             <td><label>FECHA: </label></td>
+                             <td><input type ="date" name="fecha"/></td>
+                        </tr>
+                        <tr>
+                            <td><h:commandButton value="ENVIAR"/></td>
+                        </tr>
+                </form>
+                     </table>
+                
+                
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,97 @@
+CREATE TABLE  Sucursal 
+(	
+codigo_Sucursal NUMBER PRIMARY KEY, 
+nombre VARCHAR2(30) NOT NULL, 
+direccion VARCHAR2(25) NOT NULL, 
+departamento VARCHAR2(25) NOT NULL, 
+telefono NUMBER NOT NULL, 
+no_Administradores NUMBER, 
+no_Vendedores NUMBER
+) ;
+
+CREATE SEQUENCE secuencia_U
+START WITH 1 
+INCREMENT BY 1 
+NOMAXVALUE;
+
+
+CREATE OR REPLACE TRIGGER trig_Usuario 
+BEFORE INSERT ON Sucursal
+FOR EACH ROW
+BEGIN
+SELECT secuencia_U.nextval INTO :new.codigo_Sucursal FROM dual;
+END
+;
+/
+
+CREATE TABLE  Empleado 
+   (	
+codigo_Empleado VARCHAR2(10) PRIMARY KEY, 
+nombre VARCHAR2(30) NOT NULL, 
+nit NUMBER NOT NULL, 
+edad NUMBER NOT NULL, 
+salario NUMBER(8,2) NOT NULL, 
+cargo VARCHAR2(20) NOT NULL, 
+codigo_Agencia NUMBER, 
+FOREIGN KEY (codigo_Agencia) REFERENCES  Sucursal(codigo_Sucursal)ON DELETE SET NULL
+);
+
+CREATE TABLE  Paquete_V
+   (	 
+codigo_Paquete VARCHAR2(10) PRIMARY KEY, 
+descripcion VARCHAR2(40) NOT NULL, 
+destino VARCHAR2(30) NOT NULL, 
+precio NUMBER(8,2) NOT NULL, 
+fecha DATE NOT NULL, 
+nombre VARCHAR2(20) NOT NULL 
+) ;
+
+CREATE TABLE  Cliente
+ (	
+dpi NUMBER PRIMARY KEY, 
+nombre VARCHAR2(30) NOT NULL, 
+telefono NUMBER NOT NULL, 
+edad NUMBER
+) ;
+
+			
+			
+CREATE TABLE  Solicitud
+ (	
+numero_id NUMBER(3,0) PRIMARY KEY, 
+fecha_creacion DATE NOT NULL, 
+precio NUMBER(8,2) NOT NULL, 
+codigo_Paq VARCHAR2(10), 
+codigo_Ven VARCHAR2(10), 
+dpi_Cliente NUMBER, 
+FOREIGN KEY (codigo_Paq) REFERENCES Paquete_V (codigo_Paquete) ON DELETE SET NULL,
+FOREIGN KEY (codigo_Ven) REFERENCES Empleado (codigo_Empleado) ON DELETE SET NULL,         
+FOREIGN KEY (dpi_Cliente) REFERENCES Cliente (dpi) ON DELETE SET NULL
+);
+
+CREATE SEQUENCE secuencia_S
+START WITH 1 
+INCREMENT BY 1 
+NOMAXVALUE;
+
+CREATE OR REPLACE TRIGGER  trig_Solicitud 
+BEFORE INSERT ON Solicitud
+FOR EACH ROW
+BEGIN
+SELECT secuencia_S.nextval INTO :new.numero_id FROM dual;
+END
+;
+/
+
+
+/**************** ALGUNOS COMANDOS DML USADO DENTRO DE LA APLICACION ******************/
+
+ String sentencia = "INSERT INTO Cliente (dpi, nombre, telefono, edad) VALUES (?,?,?,?)";
+ rs = consulta.executeQuery("SELECT precio FROM Paquete_V WHERE codigo_Paquete = '"+id+"'");
+ rs = consulta.executeQuery("SELECT * FROM Cliente");
+ rs = consulta.executeQuery("SELECT * FROM Solicitud");
+ sentencia ="UPDATE Solicitud SET "+campo+" = "+valor+" WHERE numero_id = "+id;
+ rs = consulta.executeQuery("SELECT no_Administradores FROM Sucursal WHERE codigo_Sucursal = "+id);
+ String sentencia = "UPDATE Sucursal SET "+campo+" = "+campo+" "+op+" 1 WHERE codigo_Sucursal = "+id; 
+ String sentencia = "SELECT codigo_Agencia FROM Empleado WHERE codigo_Empleado = '"+id+"'";
+ rs = consulta.executeQuery("SELECT no_Administradores FROM Sucursal WHERE codigo_Sucursal = "+id);
